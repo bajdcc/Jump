@@ -1,0 +1,135 @@
+#_cc_tips {
+    position: fixed;
+    right: 16px;
+    width: 290px;
+    bottom: 32px;
+    z-index: 2000
+}
+
+#_cc_tips > p {
+    position: relative;
+    background: rgba(0, 0, 0, .9);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+    border-radius: 2px;
+    margin: 10px 0px;
+    padding: 7px 10px 7px 5px;
+    z-index: 2000
+}
+
+#_cc_tips > p > div {
+    color: #FFF;
+    padding-left: 5px;
+    border-left: 5px solid #C00;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", "Microsoft Yahei UI", "Microsoft YaHei", "SimHei", "微软雅黑", "simsun", "sans-serif";
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#_cc_tips > p > div > span {
+    display: block;
+    text-align: left;
+    line-height: 20px;
+    z-index: 2000
+}
+
+#_cc_tips > p > div > span > h1, #_cc_tips > p > div > span > h2, #_cc_tips > p > div > span > h3, #_cc_tips > p > div > span > h4, #_cc_tips > p > div > span > h5, #_cc_tips > p > div > span > h6, #_cc_tips > p > div > span a h1, #_cc_tips > p > div > span a h2, #_cc_tips > p > div > span a h3, #_cc_tips > p > div > span a h4, #_cc_tips > p > div > span a h5, #_cc_tips > p > div > span a h6 {
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+
+#_cc_tips > p > div > span > h1, #_cc_tips > p > div > span > h2, #_cc_tips > p > div > span > h3, #_cc_tips > p > div > span a h1, #_cc_tips > p > div > span a h2, #_cc_tips > p > div > span a h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#_cc_tips > p > div > span > h4, #_cc_tips > p > div > span > h5, #_cc_tips > p > div > span > h6, #_cc_tips > p > div > span a h4, #_cc_tips > p > div > span a h5, #_cc_tips > p > div > span a h6 {
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+#_cc_tips > p > div > span > h1, #_cc_tips > p > div > span .h1 {
+    color: #FFF;
+    font-size: 36px;
+}
+
+#_cc_tips > p > div > span > h2, #_cc_tips > p > div > span .h2 {
+    color: #FFF;
+    font-size: 30px;
+}
+
+#_cc_tips > p > div > span > h3, #_cc_tips > p > div > span .h3 {
+    color: #FFF;
+    font-size: 24px;
+}
+
+#_cc_tips > p > div > span > h4, #_cc_tips > p > div > span .h4 {
+    color: #FFF;
+    font-size: 18px;
+}
+
+#_cc_tips > p > div > span > h5, #_cc_tips > p > div > span .h5 {
+    color: #FFF;
+    font-size: 14px;
+}
+
+#_cc_tips > p > div > span > h6, #_cc_tips > p > div > span .h6 {
+    color: #FFF;
+    font-size: 12px;
+}
+
+#_cc_tips > p > div > span > a h1, #_cc_tips > p > div > span a > .h1 {
+    color: #428bca;
+    font-size: 36px;
+}
+
+#_cc_tips > p > div > span > a h2, #_cc_tips > p > div > span a > .h2 {
+    color: #428bca;
+    font-size: 30px;
+}
+
+#_cc_tips > p > div > span > a h3, #_cc_tips > p > div > span a > .h3 {
+    color: #428bca;
+    font-size: 24px;
+}
+
+#_cc_tips > p > div > span > a h4, #_cc_tips > p > div > span a > .h4 {
+    color: #428bca;
+    font-size: 18px;
+}
+
+#_cc_tips > p > div > span > a h5, #_cc_tips > p > div > span a > .h5 {
+    color: #428bca;
+    font-size: 14px;
+}
+
+#_cc_tips > p > div > span > a > h6, #_cc_tips > p > div > span > a > .h6 {
+    color: #428bca;
+    font-size: 12px;
+}
+
+#_cc_tips > p > div > span > a:hover, #_cc_tips > p > div > span > a:focus, #_cc_tips > p > div > span > a:link, #_cc_tips > p > div > span > a:visited {
+    font-family: "Helvetica Neue", "Helvetica", "Arial", "Microsoft Yahei UI", "Microsoft YaHei", "SimHei", "微软雅黑", "simsun", "sans-serif";
+}
+
+#_cc_tips > p > div > span > a {
+    font-family: "Helvetica Neue", "Helvetica", "Arial", "Microsoft Yahei UI", "Microsoft YaHei", "SimHei", "微软雅黑", "simsun", "sans-serif";
+    color: #428bca;
+    text-decoration: none;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+    outline: none;
+}
+
+#_cc_tips > p > div > span > a:hover, #_cc_tips > p > div > span > a:focus {
+    color: #2a6496;
+    text-decoration: underline
+}
+
+#_cc_tips > p > div > span > a:focus {
+    outline: thin dotted #333;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px
+}

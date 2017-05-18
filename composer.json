@@ -1,0 +1,15 @@
+{
+  "name": "bajdcc/proxy",
+  "description": "PHP Proxy Server",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "bajdcc",
+      "email": "bajdcc@foxmail.com"
+    }
+  ],
+  "require": {
+    "sunra/php-simple-html-dom-parser": "^1.5"
+  }
+}
