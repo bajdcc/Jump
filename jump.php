@@ -35,6 +35,9 @@ class Jump
                     break;
                 case 1:
                     return $this->url($url);
+                    break;
+                case 2:
+                    return $this->url($url, false);
             }
             list($code, $content) = $this->getHeaders($url);
             switch ($code) {
@@ -71,19 +74,24 @@ class Jump
      */
     private function preAnalysis($url)
     {
-        if (isset($_GET['type'])) {
-            return 1;
-        }
         $this->uri_part = parse_url($url);
         if ($this->uri_part == FALSE)
             return 0;
+        if (isset($_GET['type'])) {
+            $type = $_GET['type'];
+            if ($type == 'img')
+                return 1;
+            if ($this->uri_part['scheme'] == 'https')
+                return 2;
+            return 4;
+        }
         unset($_GET['url']);
         $query = http_build_query($_GET);
         if (!empty($query)) {
             $this->query = '&' . $query;
         }
         if (!isset($this->uri_part['path'])) {
-            return 2;
+            return 4;
         }
         $path_parts = pathinfo($this->uri_part['path']);
         if (isset($path_parts['extension'])) {
@@ -92,7 +100,7 @@ class Jump
                 return 1;
             }
         }
-        return 2;
+        return 4;
     }
 
     /**
@@ -105,13 +113,14 @@ class Jump
     }
 
     /**
-     * @param $url
+     * @param string $url
+     * @param bool $refer
+     * @return string
      */
-    private function url($url)
+    private function url($url, $refer = true)
     {
         $options = array(
             CURLOPT_HEADER => 0,
-            CURLOPT_REFERER => $this->uri_part['host'],
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_TIMEOUT => 30,
@@ -124,6 +133,10 @@ class Jump
 
         $ch = curl_init();
         curl_setopt_array($ch, $options);
+        if ($refer) {
+            $uri_part = parse_url($url);
+            curl_setopt($ch, CURLOPT_REFERER, $uri_part['host']);
+        }
         if (!$result = curl_exec($ch)) {
             return (curl_error($ch));
         }
@@ -215,18 +228,18 @@ class Jump
                 if (isset($element->rel) && $element->rel === 'dns-prefetch') {
 
                 } else {
-                    $element->href = $this->transUrl($element->href, $url, $https, false);
+                    $element->href = $this->transUrl($element->href, $url, $https, 'css');
                 }
             }
         }
         foreach ($html->find('img') as $element) {
             if (isset($element->src) && !starts_with($element->src, '#')) {
-                $element->src = $this->transUrl($element->src, $url, $https, true);
+                $element->src = $this->transUrl($element->src, $url, $https, 'img');
             }
         }
         foreach ($html->find('script') as $element) {
             if (isset($element->src)) {
-                $element->src = $this->transUrl($element->src, $url, $https, false);
+                $element->src = $this->transUrl($element->src, $url, $https, 'js');
             }
         }
         foreach ($html->find('title') as $element) {
@@ -258,10 +271,10 @@ class Jump
      * @param string $href
      * @param string $url
      * @param bool $https
-     * @param bool $redirect
+     * @param string $type
      * @return string
      */
-    private function transUrl($href, $url, $https, $redirect = true)
+    private function transUrl($href, $url, $https, $type = null)
     {
         if (starts_with($href, 'javascript:')) {
             return $href;
@@ -274,10 +287,10 @@ class Jump
                 $href = '#';
             }
         }
-        if ($redirect) {
-            return $this->response('/jump.php?type=img&url=' . urlencode($href) . $this->query);
+        if ($type != null) {
+            return $this->response('/jump.php?type=' . $type . '&url=' . urlencode($href) . $this->query);
         } else {
-            return $href;
+            return $this->response('/jump.php?url=' . urlencode($href) . $this->query);
         }
     }
 

@@ -132,15 +132,31 @@ setTimeout(function () {
     showTip(120)("<h4 align='center'>======== &nbsp; 通知 &nbsp; ========</h4>",
         "<a href='/jump'><h3>【您已进入代理模式！】</h3></a>", "&nbsp;",
         "<h5 align='right'>———— 2017 &copy; bajdcc</h5>");
-    var url = decodeURIComponent(gup('url'));
+    $.fn.url = decodeURIComponent(gup('url'));
+    var url = $.fn.url;
     if (url.search('http') !== 0) {
         url = 'http://' + url;
     }
-    showTip(30)("<a href='" + url + "'><h4>回到原页面</h4></a>");
     showTip(10)(new Date().toLocaleString(), "<h5>处理时间：" + (1000.0 * injected_time_bajdcc).toFixed(2) + " ms</h5>");
     setTimeout(function () {
         $("<scr" + "ipt src=\"inject/www/" + url.match(/http:\/\/([^\/]+)/i)[0].slice(7) + ".js\">" + "</scr" + "ipt>").appendTo($("body"));
     }, 0);
+    setTimeout(function () {
+        $("a").each(function (idx) {
+            var src = $(this).attr('href');
+            if (!src) return;
+            if (src.match(/^\/jump.php/)) {
+                return;
+            }
+            if (src.match(/^\//)) {
+                var h = $.fn.url.match(/.*?(?=\/)/);
+                if (!h) h = $.fn.url;
+                src = h + src;
+            }
+            this.href = location.protocol + "//" + location.host + '/jump.php?url=' + encodeURIComponent(src);
+        });
+        showTip(30)("<a href='" + url + "'><h4>回到原页面</h4></a>");
+    }, 1000);
 }, 2000);
 //    });
 document.write("<scr" + "ipt src=\"js/pace.min.js\">" + "</scr" + "ipt>");
